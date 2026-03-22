@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: floodvision-backend
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: GROQ_API_KEY
+        sync: false
+```
+
+**`runtime.txt`** (in backend folder):
+```
+python-3.11.9
+```
+Render needs this to pick the right Python version.
+
+---
+
+### 3. Wrong Start Command
+Render needs to know how to start your app. Make sure your **Start Command** in the Render dashboard is:
+```
+uvicorn main:app --host 0.0.0.0 --port $PORT
